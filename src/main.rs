@@ -109,11 +109,15 @@ fn main() {
 
         let mut ss = String::new();
         match io::stdin().read_line(&mut ss) {
-            Ok(_) => {
+            Ok(bytes_read) => {
                 ss = ss.trim().to_string();
-                if ss == "quit" {
+                if bytes_read == 0 {
+                    println!("okay bye (EOF)");
+                    break
+                }
+                if ss == "quit" { 
                     println!("bye");
-                    break;
+                    break
                 }
                 if ss == "test" {
                     test();
@@ -121,14 +125,14 @@ fn main() {
                 }
                 let n = match ss.parse() {
                     Ok(z) => z,
-                    Err(_) => {
+                    Err(err) => {
                         println!("i don't understand");
-                        continue
+                        continue;
                     }
                 };
                 println!("{} is {}", ss, num_to_words(n));
             },
-            Err(_) => continue,
+            Err(_) => break,
         }
     }
 
