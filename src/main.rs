@@ -125,7 +125,7 @@ fn main() {
                 }
                 let n = match ss.parse() {
                     Ok(z) => z,
-                    Err(err) => {
+                    Err(_) => {
                         println!("i don't understand");
                         continue;
                     }
